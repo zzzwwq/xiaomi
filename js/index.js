@@ -10,18 +10,6 @@ window.onload=function(){
         goods[0].style.height="0";
         goods[0].style.boxShadow="none";
     }
-    //  侧导航
-    let photoList=document.getElementsByClassName("photoList");
-    let lis2=photoList[0].getElementsByClassName("ali");
-    let textPicture=document.getElementsByClassName("textPicture");
-    for (let i=0;i<lis2.length;i++){
-            lis2[i].onmouseenter=function(){
-                textPicture[i].style.display="block";
-            }
-            lis2[i].onmouseleave=function(){
-                textPicture[i].style.display="none";
-            }
-        }
     // 选项卡
     function name(content){
         let word_right=content.getElementsByClassName("word_right")[0];
@@ -51,64 +39,6 @@ window.onload=function(){
     name(parts);
     let side=document.getElementsByClassName("side")[0];
     name(side);
-
-    //  轮播图
-    let photoBox=document.getElementsByClassName("photoBox")[0];
-    let photoBoxLi=photoBox.getElementsByTagName("li");
-    let point=document.getElementsByClassName("point")[0];
-    let pointLi=point.getElementsByTagName("li");
-    let leftArrow=document.getElementsByClassName("leftArrow")[0];
-    let rightArrow=document.getElementsByClassName("rightArrow")[0];
-
-    let num=0;
-    let t=setInterval(move,3000);
-    photoBox.onmouseenter=function(){
-        clearInterval(t);
-    }
-    photoBox.onmouseleave=function(){
-        t=setInterval(move,3000);
-    }
-    leftArrow.onclick=function(){
-        moveL();
-    }
-    rightArrow.onclick=function(){
-        move();
-    }
-    for (let i=0;i<pointLi.length;i++){
-        pointLi[i].onclick=function(){
-            for (let j=0;j<pointLi.length;j++){
-                photoBoxLi[j].style.zIndex="5";
-                pointLi[j].className="";
-            }
-            photoBoxLi[i].style.zIndex="10";
-            pointLi[i].className="white";
-            num=i;
-        }
-    }
-    function move(){
-        num++;
-        if (num==photoBoxLi.length){
-            num=0;
-        }
-        for(let i=0;i<photoBoxLi.length;i++){
-            photoBoxLi[i].style.zIndex="5";
-            pointLi[i].className="";
-        }
-        photoBoxLi[num].style.zIndex="10";
-        pointLi[num].className="white";
-    }
-    function moveL(){
-        num--;
-        if (num<0){
-            num=photoBoxLi.length-1;
-        }
-        for(let i=0;i<photoBoxLi.length;i++){
-            photoBoxLi[i].style.zIndex="5";
-            pointLi[i].className="";
-        }
-        photoBoxLi[num].style.zIndex="10";
-        pointLi[num].className="white";
-    }
     //  内容
     let readBox=document.querySelector(".readBox");
     let current1=next1=0;
@@ -206,4 +136,154 @@ window.onload=function(){
             }
         })
     }
-}
+
+    //明星产品
+    let selectBefore=document.querySelector(".select .select_before");
+    let selectAfter=document.querySelector(".select .select_after");
+    let purchase_right=document.querySelector(".purchase_right");
+    let purchase_rightUl=document.querySelector(".purchase_right ul");
+    let width2=parseInt(getComputedStyle(purchase_right,null).width);
+
+    let rTime=0;
+    selectAfter.onclick=function(){
+        rTime++;
+        if (rTime>=2){
+            rTime=2;
+            purchase_rightUl.style.transform="translateX("+(-(width2+248+14))+"px)";
+            selectAfter.style.color="#e0e0e2";
+        }else{
+            purchase_rightUl.style.transform="translateX("+(-(width2+14)*rTime)+"px)";
+            selectAfter.style.color="#ff6700";
+        }
+        if (rTime==0){
+            selectBefore.style.color="#e0e0e2";
+        }else{
+            selectBefore.style.color="#bbb2b0";
+        }
+    }
+    selectBefore.onclick=function(){
+        rTime--;
+        if (rTime<=0){
+            rTime=0;
+            selectBefore.style.color="#e0e0e2";
+            purchase_rightUl.style.transform="translateX("+(-(width2+14)*rTime)+"px)";
+        }else{
+            purchase_rightUl.style.transform="translateX(-248px)";
+            selectBefore.style.color="#ff6700";
+        }
+        if (rTime==2){
+            selectAfter.style.color="#e0e0e2";
+        }else{
+            selectAfter.style.color="#bbb2b0";
+        }
+    }
+    selectAfter.onmouseenter=function() {
+        if (rTime==2){
+            selectAfter.style.color="#e0e0e2";
+        }else{
+            selectAfter.style.color="#ff6700";
+        }
+    }
+    selectAfter.onmouseleave=function() {
+        if (rTime==2){
+            selectAfter.style.color="#e0e0e2";
+        }else{
+            selectAfter.style.color="#bbb2b0";
+        }
+    }
+    selectBefore.onmouseenter=function() {
+        if (rTime==0){
+            selectBefore.style.color="#e0e0e2";
+        }else{
+            selectBefore.style.color="#ff6700";
+        }
+    }
+    selectBefore.onmouseleave=function() {
+        if (rTime==0){
+            selectBefore.style.color="#e0e0e2";
+        }else{
+            selectBefore.style.color="#bbb2b0";
+        }
+    }
+
+
+
+
+
+    //为你推荐
+    let select1Before=document.querySelector(".select1 .select_before");
+    let select1After=document.querySelector(".select1 .select_after");
+    let commend_bottom=document.querySelector(".commend_bottom");
+    let commend_bottomUl=document.querySelector(".commend_bottom ul");
+    let width1=parseInt(getComputedStyle(commend_bottom,null).width);
+
+
+    let times=0;
+        select1After.onclick=function(){
+            times++;
+            if (times>=2){
+                times=2;
+                select1After.style.color="#e0e0e2";
+            }else{
+                select1After.style.color="#ff6700";
+            }
+            if (times==0){
+                select1Before.style.color="#e0e0e2";
+            }else{
+                select1Before.style.color="#bbb2b0";
+            }
+            commend_bottomUl.style.transform="translateX("+(-(width1+14)*times)+"px)";
+        }
+        select1Before.onclick=function(){
+            times--;
+            if (times<=0){
+                times=0;
+                select1Before.style.color="#e0e0e2";
+            }else{
+                select1Before.style.color="#ff6700";
+            }
+            if (times==2){
+                select1After.style.color="#e0e0e2";
+            }else{
+                select1After.style.color="#bbb2b0";
+            }
+            commend_bottomUl.style.transform="translateX("+(-(width1+14)*times)+"px)";
+        }
+        select1After.onmouseenter=function() {
+            if (times==2){
+                select1After.style.color="#e0e0e2";
+            }else{
+                select1After.style.color="#ff6700";
+            }
+        }
+        select1After.onmouseleave=function() {
+            if (times==2){
+                select1After.style.color="#e0e0e2";
+            }else{
+                select1After.style.color="#bbb2b0";
+            }
+        }
+        select1Before.onmouseenter=function() {
+            if (times==0){
+                select1Before.style.color="#e0e0e2";
+            }else{
+                select1Before.style.color="#ff6700";
+            }
+    }
+        select1Before.onmouseleave=function() {
+            if (times==0){
+                select1Before.style.color="#e0e0e2";
+            }else{
+                select1Before.style.color="#bbb2b0";
+            }
+    }
+
+    // 固定定位
+    let zhiding=document.querySelector(".zhiding");
+        zhiding.onclick=function(){
+            animate(document.body,{scrollTop:0});
+            animate(document.documentElement,{scrollTop:0});
+        }
+
+
+    }
