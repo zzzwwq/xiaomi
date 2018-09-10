@@ -38,8 +38,9 @@ $(function(){
     //  轮播图
     let photoBox=$(".photoBox");
     let photoBoxLi=$(".photoBox li");
-    let leftArrow=document.getElementsByClassName("leftArrow")[0];
-    let rightArrow=document.getElementsByClassName("rightArrow")[0];
+    let leftArrow=$(".leftArrow");
+    console.log(leftArrow);
+    let rightArrow=$(".rightArrow");
     let pointLi=$(".point li");
     let num=0;
     let t=setInterval(move,3000);
@@ -72,10 +73,10 @@ $(function(){
         }
     )
     leftArrow.click(function(){
-        move("left");
+        move("right");
     })
     rightArrow.click(function(){
-        move("right");
+        move("left");
     })
     pointLi.click(function(){
         let index1 = $(this).index();
